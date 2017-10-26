@@ -7,36 +7,39 @@ import java.util.Scanner;
 public class DecisionTree {
     private DecisionNode root;
 
-    public DecisionTree() {}
-    
+    public DecisionTree() {
+        root = new GuessNode("Dog");
+    }
+
     public DecisionTree(File file) throws FileNotFoundException {
         Scanner in = new Scanner(file);
-        
+        root = decisionTreeHelper(in);
+        in.close();
     }
-    
+
+    private DecisionNode decisionTreeHelper(Scanner in) {
+        while (in.hasNextLine()) {
+            String line = in.nextLine();
+            if (line.charAt(0) != '#') {
+                return new GuessNode(line);
+            } else {
+                return new QuestionNode(line.substring(1, line.length()), decisionTreeHelper(in),
+                        decisionTreeHelper(in));
+            }
+        }
+        return root;
+    }
+
     public int countObjects() {
         return root.countObjects();
     }
 
     public void guess(Scanner in) {
-        System.out.println(
-                "I am the learning genie!\n"
-                + "I can figure out whatever you are thinking of by asking questions.\n"
-                + "I know 1 thing!\n");
-        guessHelper(in);        
-    }
-    
-    private void guessHelper(Scanner in) {
-        System.out.println("Think of an object!");
-        root.guess(in);
-        System.out.println("Do you want to continue?");
-        String response = in.nextLine();
-        if (response.equals("Yes")) {
-            guessHelper(in);
-        }
+        root = root.guess(in);
     }
 
     public void write(FileWriter out) throws IOException {
         root.write(out);
+        out.close();
     }
 }

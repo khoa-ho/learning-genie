@@ -14,28 +14,31 @@ public class GuessNode implements DecisionNode {
     }
 
     public DecisionNode guess(Scanner in) {
-        System.out.println("Are you thinking of " + guess + "?");
+        System.out.print("Are you thinking of " + guess + "? ");
         String response = in.nextLine().toLowerCase();
+        while (!response.equals("yes") && !response.equals("no")) {
+            System.out.println("Incorrect response! Please answer Yes or No");
+            System.out.print("Are you thinking of " + guess + "? ");
+            response = in.nextLine().toLowerCase();
+        }
+
         if (response.equals("yes")) {
             System.out.println("Excellent, thanks!");
             return new GuessNode(guess);
-        } else if (response.equals("no")) {
-            System.out.println("Oh no, I was wrong!\n"
-                    + "What animal were you thinking of?");
+        } else {
+            System.out.print("Oh no, I was wrong!\n" + "What object were you thinking of? ");
             String answer = in.nextLine();
             System.out.println("What is a yes/no question that distinguishes a " + guess
                     + " from a " + answer + "?");
-            System.out.println("(Yes corresponds to " + guess + "; No corresponds to "+ answer + ")");
+            System.out.print(
+                    "(Yes corresponds to " + guess + "; No corresponds to " + answer + ") ");
             String query = in.nextLine();
             System.out.println("Thanks!  I'll learn from this experience!");
-            return new QuestionNode(query, guess, answer);
-        } else {
-            System.out.println("Incorrect response! Please answer Yes or No");
-            return guess(in);
+            return new QuestionNode(query, new GuessNode(guess), new GuessNode(answer));
         }
     }
 
     public void write(FileWriter out) throws IOException {
-        out.write(guess + "\n");
+        out.write(guess + System.lineSeparator());
     }
 }

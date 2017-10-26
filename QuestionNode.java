@@ -7,10 +7,10 @@ public class QuestionNode implements DecisionNode {
     public DecisionNode yesTree;
     public DecisionNode noTree;
 
-    public QuestionNode(String query, String yesAnswer, String noAnswer) {
+    public QuestionNode(String query, DecisionNode yesTree, DecisionNode noTree) {
         this.query = query;
-        this.yesTree = new GuessNode(yesAnswer);
-        this.noTree = new GuessNode(noAnswer);
+        this.yesTree = yesTree;
+        this.noTree = noTree;
     }
 
     public int countObjects() {
@@ -18,19 +18,24 @@ public class QuestionNode implements DecisionNode {
     }
 
     public DecisionNode guess(Scanner in) {
-        System.out.println(query);
+        System.out.print(query + " ");
         String response = in.nextLine().toLowerCase();
-        if (response.equals("yes")) {
-            return yesTree.guess(in);
-        } else if (response.equals("no")) {
-            return noTree.guess(in);
-        } else {
-            return guess(in);
+        while (!response.equals("yes") && !response.equals("no")) {
+            System.out.println("Incorrect response! Please answer Yes or No");
+            System.out.print(query + " ");
+            response = in.nextLine().toLowerCase();
         }
+        
+        if (response.equals("yes")) {
+            yesTree = yesTree.guess(in);
+        } else {
+            noTree = noTree.guess(in);
+        }
+        return new QuestionNode(query, yesTree, noTree);
     }
 
     public void write(FileWriter out) throws IOException {
-        out.write("#" + query + "\n");
+        out.write("#" + query + System.lineSeparator());
         yesTree.write(out);
         noTree.write(out);
     }
