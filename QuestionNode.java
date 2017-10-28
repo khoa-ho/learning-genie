@@ -25,7 +25,7 @@ public class QuestionNode implements DecisionNode {
             System.out.print(query + " ");
             response = in.nextLine().toLowerCase();
         }
-        
+
         if (response.equals("yes")) {
             yesTree = yesTree.guess(in);
         } else {

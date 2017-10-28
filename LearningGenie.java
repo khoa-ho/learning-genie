@@ -32,7 +32,7 @@ public class LearningGenie {
                 System.out.print("Do you want to continue? ");
                 response = in.nextLine().toLowerCase();
             }
-            
+
             if (response.equals("no")) {
                 isContinued = false;
             }

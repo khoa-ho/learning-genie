@@ -30,8 +30,8 @@ public class GuessNode implements DecisionNode {
             String answer = in.nextLine();
             System.out.println("What is a yes/no question that distinguishes a " + guess
                     + " from a " + answer + "?");
-            System.out.print(
-                    "(Yes corresponds to " + guess + "; No corresponds to " + answer + ") ");
+            System.out
+                    .print("(Yes corresponds to " + guess + "; No corresponds to " + answer + ") ");
             String query = in.nextLine();
             System.out.println("Thanks!  I'll learn from this experience!");
             return new QuestionNode(query, new GuessNode(guess), new GuessNode(answer));
