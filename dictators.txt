@@ -1,0 +1,31 @@
+#Are they European?
+#Do they have a moustache?
+#Is it a big moustache?
+Stalin
+#Is he Austrian?
+Hitler
+Franco
+Mussolini
+#Are they African?
+#Are they Alive?
+Mugabe
+Idi Amin
+#Are they Asian?
+#Are they Korean?
+#Are they alive?
+Kim Jung Un
+Kim Jung Il
+#Does their name include cookware?
+Pol Pot
+#Are they Philippino?
+PM
+Mao Zedong
+#Are they from South/Central America?
+#Do they throw people out of helicopters?
+Pinochet
+Debayle
+#Are they from the Caribbean?
+Castro
+#Are they alive?
+al Assad
+Hussein
