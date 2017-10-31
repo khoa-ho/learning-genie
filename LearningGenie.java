@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 public class LearningGenie {
     public static void main(String[] args) throws IOException {
-        String fileName = "genieData.txt";
+        /*
+         * Imports a data file or makes a new one with the root guess
+         */
+        String fileName = "dictators.txt";
         File genieData = new File(fileName);
         DecisionTree root;
         if (genieData.exists()) {
@@ -23,6 +26,9 @@ public class LearningGenie {
         boolean isContinued = true;
         while (isContinued) {
             System.out.println("\nThink of an object!");
+            /*
+             * Begins the guessing game depending on the given file
+             */
             root.guess(in);
 
             System.out.print("Do you want to continue? ");
@@ -37,6 +43,9 @@ public class LearningGenie {
                 isContinued = false;
             }
         }
+        /*
+         * exits out of the program
+         */
         root.write(out);
         in.close();
     }
